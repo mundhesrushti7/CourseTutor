@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light Theme (Default: soft off-white background, clean airy surfaces, muted blue accent) */
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-subtle: #f1f5f9;
+  --border: #e2e8f0;
+  --border-subtle: #cbd5e1;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --accent: #2563eb;
+  --accent-bg: #eff6ff;
+  --accent-border: #bfdbfe;
+  --accent-text: #1d4ed8;
+  --header-bg: #ffffff;
+  --header-border: #e2e8f0;
+  --user-bubble-bg: #0f172a;
+  --user-bubble-text: #ffffff;
+  --user-bubble-border: #1e293b;
+  --tutor-bubble-bg: #ffffff;
+  --tutor-bubble-text: #0f172a;
+  --tutor-bubble-border: #e2e8f0;
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --code-bg: #1e293b;
+  --code-border: #334155;
+  --code-text: #f8fafc;
+  --table-th-bg: #f8fafc;
+  --table-border: #e2e8f0;
+
+  /* Concept state colors for Light Mode */
+  --concept-confident: #059669;
+  --concept-confident-bg: #ecfdf5;
+  --concept-learning: #2563eb;
+  --concept-learning-bg: #eff6ff;
+  --concept-needs-revision: #dc2626;
+  --concept-needs-revision-bg: #fef2f2;
+  --concept-unexplored: #475569;
+  --concept-unexplored-bg: #f1f5f9;
+}
+
+html.dark {
+  /* Dark Theme (Dark slate background, pill shapes, high contrast) */
+  --bg: #0b0f19;
+  --surface: #16203a;
+  --surface-subtle: #1d2c47;
+  --border: #27374f;
+  --border-subtle: #33485f;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent: #3b82f6;
+  --accent-bg: #1e3a8a;
+  --accent-border: #2563eb;
+  --accent-text: #93c5fd;
+  --header-bg: #0d1525;
+  --header-border: #1d2c47;
+  --user-bubble-bg: #1d2c47;
+  --user-bubble-text: #f8fafc;
+  --user-bubble-border: #33485f;
+  --tutor-bubble-bg: #16203a;
+  --tutor-bubble-text: #f8fafc;
+  --tutor-bubble-border: #27374f;
+  --input-bg: #16203a;
+  --input-border: #27374f;
+  --code-bg: #0f172a;
+  --code-border: #1e293b;
+  --code-text: #f8fafc;
+  --table-th-bg: #1d2c47;
+  --table-border: #27374f;
+
+  /* Concept state colors for Dark Mode */
+  --concept-confident: #4ade80;
+  --concept-confident-bg: #0b2a1a;
+  --concept-learning: #60a5fa;
+  --concept-learning-bg: #0f2038;
+  --concept-needs-revision: #f07272;
+  --concept-needs-revision-bg: #271414;
+  --concept-unexplored: #94a3b8;
+  --concept-unexplored-bg: #1d2c47;
+}
+
+
+/* ─── Box model: prevent padding from blowing out viewport width ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Prevent html/body from growing wider than the viewport or
+   producing a horizontal scrollbar gutter on mobile. */
+html, body {
+  overflow-x: hidden;
+  /* Use dvh-based height so the viewport reference updates when
+     the on-screen keyboard opens/closes on mobile. */
+  min-height: 100dvh;
+}
+
+/* On mobile hide the global scrollbar gutter so it doesn't
+   push the layout left and leave a dark strip on the right.
+   The scroll area is the <main> element itself, which gets
+   its own scrollbar (styled via ::-webkit-scrollbar below). */
+@media (max-width: 768px) {
+  html, body {
+    scrollbar-width: none; /* Firefox */
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none; /* WebKit */
+  }
+}
+
+@layer base {
+  body {
+    background-color: var(--bg);
+    color: var(--text-primary);
+    @apply font-sans min-h-screen transition-colors duration-200;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Markdown typography tweaks */
+.markdown-body {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+
+.markdown-body p {
+  margin-bottom: 0.85rem;
+}
+
+.markdown-body p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 0.85rem;
+  padding-left: 1.35rem;
+}
+
+.markdown-body ul {
+  list-style-type: disc;
+}
+
+.markdown-body ol {
+  list-style-type: decimal;
+}
+
+.markdown-body li {
+  margin-bottom: 0.25rem;
+}
+
+.markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.markdown-body h1 { font-size: 1.35rem; }
+.markdown-body h2 { font-size: 1.18rem; }
+.markdown-body h3 { font-size: 1.05rem; }
+
+/* Responsive tables */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--table-border);
+}
+
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+.markdown-body th {
+  background-color: var(--table-th-bg);
+  color: var(--text-secondary);
+  font-weight: 600;
+  padding: 0.625rem 0.875rem;
+  border-bottom: 1px solid var(--table-border);
+}
+
+.markdown-body td {
+  padding: 0.625rem 0.875rem;
+  border-bottom: 1px solid var(--table-border);
+  color: var(--text-primary);
+}
+
+.markdown-body tr:last-child td {
+  border-bottom: none;
+}
+
+.markdown-body tr:nth-child(even) td {
+  background-color: var(--surface-subtle);
+}
+
+/* Ensure markdown-body respects parent text color when inside a code/themed block */
+.text-app-code-text .markdown-body,
+.markdown-body.text-app-code-text {
+  color: var(--code-text);
+}
+
+/* KaTeX tweaks */
+.katex-display {
+  margin: 0.75rem 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0;
+}
+
+.katex {
+  color: inherit;
+}
+
+/* Pulse animation for thinking state */
+@keyframes calmPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.animate-calm-pulse {
+  animation: calmPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
