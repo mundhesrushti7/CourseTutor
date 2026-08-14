@@ -67,8 +67,8 @@ run entirely client-side from the provided `data/` files.
   this (the assignment provides a mock streaming endpoint with 8 fixed responses), different
   phrasings of the same question may not always trigger the intended response. This took several
   iterations to get reasonably reliable and still isn't perfect — see `AI_USAGE.md` for details.
-- **The exam date is a hardcoded config constant**, not connected to a real calendar or course
-  system. It's easy to find and change in one place.
+- **The 'Sample Data' quick-load button doesn't currently reflect the exact content of conversation.json
+   — it was a convenience shortcut added during development and I didn't have time to verify it against the real file before submission.
 
 ## Tech stack
 
